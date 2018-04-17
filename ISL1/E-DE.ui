@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>569</width>
+    <height>303</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>569</width>
+    <height>303</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>E-DE</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout_4">
+    <item>
+     <widget class="QGroupBox" name="input_box">
+      <property name="title">
+       <string>Input</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <widget class="QPlainTextEdit" name="input">
+         <property name="statusTip">
+          <string>Input area</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_6">
+      <item>
+       <widget class="QGroupBox" name="output_box">
+        <property name="title">
+         <string>Encrypted</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_5">
+         <item>
+          <widget class="QPlainTextEdit" name="output">
+           <property name="statusTip">
+            <string>Output view</string>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <spacer name="horizontalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="mode_box">
+          <property name="minimumSize">
+           <size>
+            <width>81</width>
+            <height>114</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>81</width>
+            <height>114</height>
+           </size>
+          </property>
+          <property name="title">
+           <string>Mode</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <widget class="QRadioButton" name="encrypt_mode">
+             <property name="statusTip">
+              <string>Toggle encrypt mode</string>
+             </property>
+             <property name="text">
+              <string>Encrypt</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="decrypt_mode">
+             <property name="statusTip">
+              <string>Toggle decrypt mode</string>
+             </property>
+             <property name="text">
+              <string>Decrypt</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="view_box">
+          <property name="minimumSize">
+           <size>
+            <width>81</width>
+            <height>114</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>114</width>
+            <height>114</height>
+           </size>
+          </property>
+          <property name="title">
+           <string>View</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <item>
+            <widget class="QRadioButton" name="code_rb">
+             <property name="statusTip">
+              <string>Show character codes in output view</string>
+             </property>
+             <property name="text">
+              <string>Code</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="char_rb">
+             <property name="statusTip">
+              <string>Show characters in output view</string>
+             </property>
+             <property name="text">
+              <string>Char</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="crypt_settings_box">
+          <property name="minimumSize">
+           <size>
+            <width>171</width>
+            <height>114</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>171</width>
+            <height>114</height>
+           </size>
+          </property>
+          <property name="title">
+           <string>Crypt settings</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <layout class="QFormLayout" name="formLayout">
+             <property name="formAlignment">
+              <set>Qt::AlignHCenter|Qt::AlignTop</set>
+             </property>
+             <property name="horizontalSpacing">
+              <number>6</number>
+             </property>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label">
+               <property name="text">
+                <string>Key:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="key_input">
+               <property name="minimumSize">
+                <size>
+                 <width>83</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>83</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="statusTip">
+                <string>Cypher key (max. 9 symbols)</string>
+               </property>
+               <property name="inputMethodHints">
+                <set>Qt::ImhNone</set>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="maxLength">
+                <number>9</number>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+               <property name="placeholderText">
+                <string>0</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout">
+             <item>
+              <spacer name="horizontalSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="rand_b">
+               <property name="statusTip">
+                <string>Set random cypher key</string>
+               </property>
+               <property name="text">
+                <string>Random</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <item>
+              <spacer name="horizontalSpacer_4">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="enable_encrypting_cb">
+               <property name="toolTip">
+                <string/>
+               </property>
+               <property name="statusTip">
+                <string>Enable encrypting</string>
+               </property>
+               <property name="text">
+                <string>Enable</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_5">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>569</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionOpen"/>
+    <addaction name="actionSave"/>
+   </widget>
+   <addaction name="menuFile"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open</string>
+   </property>
+   <property name="statusTip">
+    <string>Open input file</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+   <property name="statusTip">
+    <string>Save output to text file</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
