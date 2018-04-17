@@ -24,8 +24,10 @@ class EDECore(EDEui):
         # connect callbacks with buttons
 
         self.input.textChanged.connect(self.cypher_callback)
-        self.decrypt_mode.clicked.connect(self.switch_mode_callback)
-        self.encrypt_mode.clicked.connect(self.switch_mode_callback)
+        #self.decrypt_mode.clicked.connect(self.switch_mode_callback)
+        self.decrypt_mode.toggled['bool'].connect(self.switch_mode_callback)
+        # self.encrypt_mode.clicked.connect(self.switch_mode_callback)
+        self.encrypt_mode.toggled['bool'].connect(self.switch_mode_callback)
         self.enable_encrypting_cb.clicked.connect(self.cypher_callback)
 
         self.code_rb.clicked.connect(self.cypher_callback)
@@ -39,15 +41,21 @@ class EDECore(EDEui):
         self.actionOpen.triggered.connect(self.open_file)
         self.actionSave.triggered.connect(self.save_file)
 
-    def switch_mode_callback(self):
+    def switch_mode_callback(self, enabled: bool):
+
+        if not enabled:
+            return
+
+        in_ = self.input.toPlainText()
+        out_ = self.output.toPlainText()
+
+        self.input.setPlainText(out_)
+        self.output.setPlainText(in_)
+
         if self.encrypt_mode.isChecked():
             self.output_box.setTitle('Encrypted')
         elif self.decrypt_mode.isChecked():
             self.output_box.setTitle('Decrypted')
-
-        self.key = 0
-        self.key_input.setText(str(self.key))
-        self.cypher_callback()
 
     def cypher_callback(self):
         # cypher here
@@ -55,19 +63,17 @@ class EDECore(EDEui):
             return
 
         try:
-            cypher = self.input.toPlainText()
+            str_in = self.input.toPlainText()
 
             if self.encrypt_mode.isChecked():
-                cypher = Codec.encrypt(cypher, self.key)
+                str_in = Codec.encrypt(str_in, self.key)
+                str_in = Codec.str_to_codes(str_in)
             elif self.decrypt_mode.isChecked():
-                cypher = Codec.decrypt(cypher, self.key)
-            if self.code_rb.isChecked():
-                cypher = Codec.DELIMITER.join(str(ord(ch)) for ch in cypher)
+                str_in = Codec.codes_to_str(str_in)
+                str_in = Codec.decrypt(str_in, self.key)
 
-            self.output.setPlainText(cypher)
-
-        except Exception as e:
-            show_error(str(e))
+            self.output.setPlainText(str_in)
+        except:
             pass
 
     def set_key_callback(self):
@@ -78,7 +84,6 @@ class EDECore(EDEui):
             self.cypher_callback()
         except Exception as e:
             self.key = 0
-            #show_error(str(e))
 
     def rand_b_callback(self):
         # random value in settings
@@ -93,32 +98,32 @@ class EDECore(EDEui):
 
     # Fileo added
     def __check_path(self, path: str):
-        return True if path not in ('', None) and Path(path).exists() and Path(path).resolve().suffix == '.txt' else False
+        return True if path not in ('', None) and \
+                       Path(path).exists() and \
+                       Path(path).resolve().suffix == '.txt' else False
     
     def open_file(self):
         path = QFileDialog.getOpenFileName()
         
         if self.__check_path(path[0]):
             try:
-                with open(path[0], 'r') as f:
-                    self.input.setPlainText(f.read())
-            except:
-                pass
+                with open(path[0], 'rb') as f:
+                    txt = f.read()
+                    self.input.setPlainText(txt.decode('utf-8', 'ignore'))
+            except Exception as e:
+                show_error(str(e))
+
+        elif path[0] not in ('', None):
+            show_error('Select *.txt file please')
 
     def save_file(self):
         path = QFileDialog.getSaveFileName(filter='.txt', initialFilter='.txt')
 
-        print(path)
-        
-        #if self.__check_path(path[0]):
         if path[0] not in ('', None):
-            #if Path(path[0]).resolve().suffix != '.txt':
-                #path[0] += '.txt'
-                
-            with open(path[0] + path[1], 'w') as f:
+
+            with open(path[0] + path[1], 'wb') as f:
                 ws = self.output.toPlainText()
                 try:
-                    f.write(ws)
+                    f.write(ws.encode('utf-8', 'ignore'))
                 except Exception as e:
                     print(e)
-                
